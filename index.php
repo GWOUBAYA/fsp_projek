@@ -32,7 +32,8 @@ $prd1 = query("SELECT * FROM `soal` LIMIT $awalData,$jumlahDataPerHalaman;");
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
     <title>Hello, world!</title>
 </head>
@@ -74,22 +75,21 @@ $prd1 = query("SELECT * FROM `soal` LIMIT $awalData,$jumlahDataPerHalaman;");
         <div class="row">
             <?php
             $i = 0;
-            $result = mysqli_query($conn, "SELECT * FROM product");
             foreach ($prd1 as $product) :
-                $i++;
 
+                $i++;
             ?>
 
-                <div class="col-6">
+            <div class="col-6">
 
-                    <div class="card" style="width: 30rem;">
-                        <div class="card-body">
-                            <!-- <h5 class="card-title"><?= $product['idsoal']; ?> </h5> -->
-                            <p class="card-text">Nomor: <?= $product['nomor']; ?></p>
-                            <p class="card-text">Pertanyaan: <?= $product['pertanyaan']; ?></p>
-                            <p class="card-text">Jawaban:
-                                <?php
-                                $prd2 = query("SELECT * FROM `soal` INNER JOIN jawaban ON soal.idsoal = jawaban.soal_idsoal WHERE idsoal = $i;");
+                <div class="card" style="width: 30rem;">
+                    <div class="card-body">
+                        <!-- <h5 class="card-title"><?= $product['idsoal']; ?> </h5> -->
+                        <p class="card-text">Nomor: <?= $product['nomor']; ?></p>
+                        <p class="card-text">Pertanyaan: <?= $product['pertanyaan']; ?></p>
+                        <p class="card-text">Jawaban:
+                            <?php
+                                $prd2 = query("SELECT * FROM soal INNER JOIN jawaban ON soal.idsoal = jawaban.idsoal WHERE soal.idsoal = $i;");
 
                                 $freq = [];
                                 $number = rand(0, 3);
@@ -98,49 +98,62 @@ $prd1 = query("SELECT * FROM `soal` LIMIT $awalData,$jumlahDataPerHalaman;");
                                     while (in_array($number, $freq)) $number = rand(0, 3);
                                     $freq[] = $number;
                                 }
+
                                 ?>
-                            <form action="result.php" method="POST">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault1" onclick="handleClick(this);" value="<?= $prd2[$freq[0]]["isi_jawaban"]; ?>">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        <?php
+
+                        <div class="form-check">
+                            <label><input nosoal="<?= $i ?>" class="form-check-input" type='radio'
+                                    name='jawaban<?= $i ?>' id="flexRadioDefault1" onclick='goDoSomething1(this);
+                             handleClick1(this);' data-id='jawaban1s<?= $i ?>'
+                                    value='<?= $prd2[$freq[0]]["isi_jawaban"] ?>'>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    <?php
                                         echo $prd2[$freq[0]]["isi_jawaban"];
                                         ?>
-                                    </label>
-                                </div>
+                                </label>
+                        </div>
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault1" onclick="handleClick(this);" value="<?= $prd2[$freq[0]]["isi_jawaban"]; ?>">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        <?php
+                        <div class="form-check">
+                            <label><input nosoal="<?= $i ?>" class="form-check-input" type='radio'
+                                    name='jawaban<?= $i ?>' id="flexRadioDefault1" onclick='goDoSomething1(this);
+                             handleClick1(this);' data-id='jawaban2s<?= $i ?>'
+                                    value='<?= $prd2[$freq[0]]["isi_jawaban"] ?>'>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    <?php
                                         echo $prd2[$freq[1]]["isi_jawaban"];
                                         ?>
-                                    </label>
-                                </div>
+                                </label>
+                        </div>
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault1" onclick="handleClick(this);" value="<?= $prd2[$freq[0]]["isi_jawaban"]; ?>">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        <?php
+                        <div class="form-check">
+                            <label><input nosoal="<?= $i ?>" class="form-check-input" type='radio'
+                                    name='jawaban<?= $i ?>' id="flexRadioDefault1" onclick='goDoSomething1(this);
+                             handleClick1(this);' data-id='jawaban3s<?= $i ?>'
+                                    value='<?= $prd2[$freq[0]]["isi_jawaban"] ?>'>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    <?php
                                         echo $prd2[$freq[2]]["isi_jawaban"];
                                         ?>
-                                    </label>
-                                </div>
+                                </label>
+                        </div>
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault1" onclick="handleClick(this);" value="<?= $prd2[$freq[0]]["isi_jawaban"]; ?>">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        <?php
+                        <div class="form-check">
+                            <label><input nosoal="<?= $i ?>" class="form-check-input" type='radio'
+                                    name='jawaban<?= $i ?>' id="flexRadioDefault1" onclick='goDoSomething1(this);
+                             handleClick1(this);' data-id='jawaban4s<?= $i ?>'
+                                    value='<?= $prd2[$freq[0]]["isi_jawaban"] ?>'>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    <?php
                                         echo $prd2[$freq[3]]["isi_jawaban"];
                                         ?>
-                                    </label>
-                                </div>
-
-                                </p>
+                                </label>
                         </div>
+
+                        </p>
                     </div>
-                    <br><br>
                 </div>
+                <br><br>
+            </div>
 
             <?php
 
@@ -148,12 +161,11 @@ $prd1 = query("SELECT * FROM `soal` LIMIT $awalData,$jumlahDataPerHalaman;");
 
 
             ?>
-            <?php if ($halamanAktif == 2) : ?>
-                <input class="btn btn-primary" type="submit" name="submit">
+            <?php if ($halamanAktif == $jumlahHalaman) : ?>
+            <input class="btn btn-primary" type="submit" name="submit">
             <?php else : ?>
-                <input class="btn btn-primary disabled" type="submit" name="submit" value="Get Values">
+            <input class="btn disabled" style="color:white;" type="" name="" value="">
             <?php endif; ?>
-            </form>
             <!-- <form action="result.php" method="POST"> -->
 
         </div>
@@ -165,17 +177,18 @@ $prd1 = query("SELECT * FROM `soal` LIMIT $awalData,$jumlahDataPerHalaman;");
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center mt-3">
             <?php if ($halamanAktif > 1) : ?>
-                <li class="page-item"><a class="page-link" href="?halaman=<?= $halamanAktif - 1 ?>">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="?halaman=<?= $halamanAktif - 1 ?>">Previous</a></li>
             <?php endif; ?>
             <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
-                <?php if ($i == $halamanAktif) : ?>
-                    <li class="page-item"><a class="page-link" style="font-weight: bold; color: red;" href="?halaman=<?= $i ?>"><?= $i ?></a></li>
-                <?php else : ?>
-                    <li class="page-item"><a class="page-link" href="?halaman=<?= $i ?>"><?= $i ?></a></li>
-                <?php endif; ?>
+            <?php if ($i == $halamanAktif) : ?>
+            <li class="page-item"><a class="page-link" style="font-weight: bold; color: red;"
+                    href="?halaman=<?= $i ?>"><?= $i ?></a></li>
+            <?php else : ?>
+            <li class="page-item"><a class="page-link" href="?halaman=<?= $i ?>"><?= $i ?></a></li>
+            <?php endif; ?>
             <?php endfor; ?>
             <?php if ($halamanAktif < 2) : ?>
-                <li class="page-item"><a class="page-link" href="?halaman=<?= $halamanAktif + 1 ?>">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?halaman=<?= $halamanAktif + 1 ?>">Next</a></li>
             <?php endif; ?>
             <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -188,8 +201,77 @@ $prd1 = query("SELECT * FROM `soal` LIMIT $awalData,$jumlahDataPerHalaman;");
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+    var tesJaw1 = ""
+    var tesJaw2 = ""
+
+    function goDoSomething1(identifier) {
+        tesJaw1 = $(identifier).data('id')
+
+    }
+
+    function goDoSomething2(identifier) {
+
+    }
+
+    function handleClick1(myRadio) {
+
+        var field1 = tesJaw1;
+
+        var obj1 = {};
+
+        obj1[field1] = "checked";
+
+        sessionStorage.setItem("data1", JSON.stringify(obj1))
+        console.log(tesJaw1)
+
+    }
+
+
+
+
+    function handleClick2(myRadio) {
+
+        var field2 = tesJaw2;
+
+        var obj2 = {};
+
+        obj2[field2] = "checked";
+        sessionStorage.setItem("data2", JSON.stringify(obj2))
+
+    }
+
+    $(document).ready(function() {
+
+        var data = sessionStorage.getItem('data1');
+        console.log(data)
+        var a = document.getElements
+        var json = console.log(document.getElementById('jawaban1s1'))
+        console.log(JSON.parse(data).jawaban1s2)
+        if (JSON.parse(data).jawaban1s1 == 'checked') {
+
+
+            document.getElementById('tes1').checked = true;
+        } else if (JSON.parse(data).jawaban1s2 == 'checked') {
+
+
+            document.getElementById('tes2').checked = true;
+        } else if (JSON.parse(data).jawaban1s3 == 'checked') {
+
+
+            document.getElementById('tes3').checked = true;
+        } else if (JSON.parse(data).jawaban1s4 == 'checked') {
+
+
+            document.getElementById('tes4').checked = true;
+        }
+    });
+    </script>
     <!-- <script>
         function handleClick(myRadio) {
             sessionStorage.setItem("data", JSON.stringify({
